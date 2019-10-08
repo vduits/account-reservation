@@ -10,3 +10,6 @@ spring:
     show-sql: true
 server:
   port: 8048
+api:
+  crossorigin: http://localhost:4200
+  uri: /api/
