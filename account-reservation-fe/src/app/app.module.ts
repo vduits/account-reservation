@@ -13,12 +13,14 @@ import { LoginComponent } from './login/login/login.component';
 import { environment } from '../environments/firebase';
 import { ReservationService } from './services/api/reservation/reservation.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MenuComponent } from './menu/menu/menu.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
