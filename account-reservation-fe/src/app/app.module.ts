@@ -11,17 +11,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
 
 import { environment } from '../environments/firebase';
-import { MenuComponent } from './menu/menu/menu.component';
-import { ReservationComponent } from './reservation/reservation.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReservationService } from './services/api/reservation/reservation.service';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MenuComponent,
-    ReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +28,7 @@ import { ReservationService } from './services/api/reservation/reservation.servi
     AngularFirestoreModule,
     AngularFireAuthModule,
     HttpClientModule,
-    NoopAnimationsModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
