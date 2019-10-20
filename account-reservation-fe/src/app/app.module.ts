@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login/login.component';
 import { environment } from '../environments/firebase';
 import { ReservationService } from './services/api/reservation/reservation.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReservationComponent } from './reservation/reservation.component';
 import { MenuComponent } from './menu/menu/menu.component';
 
 
@@ -20,6 +21,7 @@ import { MenuComponent } from './menu/menu/menu.component';
   declarations: [
     AppComponent,
     LoginComponent,
+    ReservationComponent,
     MenuComponent
   ],
   imports: [

@@ -1,4 +1,35 @@
-<p>reservation works!</p>
-
+<h1>Reservations</h1>
+<div *ngIf="this.authService.isLoggedIn()">
+<form class="form-group" [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>
+            Motivation:
+        </label>
+        <input type="textarea" class="form-control" formControlName="motivatie">
+    </div>
+    <div class="form-group">
+        <label>
+            Date:
+        </label>
+        <input type="date" class="form-control" formControlName="date" />
+    </div>
+    <div class="form-group">
+        <label>
+            From:
+        </label>
+        <input type="time" class="form-control" formControlName="starttime" />
+    </div>
+    <div class="form-group">
+        <label>
+            Until:
+        </label>
+        <input type="time" class="form-control" formControlName="endtime" />
+    </div>
+    <button type="submit" [disabled]="!reservationForm.valid">Submit</button>
+</form>
+</div>
+<div *ngIf="!this.authService.isLoggedIn()">
+    <p>Please login to use this page</p>
+</div>
 
 <button (click)="reservationRequestNow()" mat-button>Reserve today</button>
