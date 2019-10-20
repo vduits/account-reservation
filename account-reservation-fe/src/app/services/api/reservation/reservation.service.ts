@@ -14,6 +14,7 @@ export class ReservationService {
   createReservationToday() {
     let body = null;
     let stuff = `${environment.api}${this.reservationEndpoint}`;
+    environment.api
     return this.http.post(stuff,body);
   }
-}
+} 

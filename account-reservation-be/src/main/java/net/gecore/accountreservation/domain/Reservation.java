@@ -1,7 +1,6 @@
 package net.gecore.accountreservation.domain;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +20,7 @@ public class Reservation {
   private LocalDateTime start_date;
   private LocalDateTime end_date;
   private String request_info;
-  private String state;
+  private String status;
 
   public UUID getId() {
     return id;
@@ -79,12 +78,12 @@ public class Reservation {
     this.request_info = request_info;
   }
 
-  public String getState() {
-    return state;
+  public String getStatus() {
+    return status;
   }
 
-  public void setState(String state) {
-    this.state = state;
+  public void setStatus(String status) {
+    this.status = status;
   }
 
 }
