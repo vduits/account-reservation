@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import net.gecore.accountreservation.domain.Reservation;
 import net.gecore.accountreservation.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,9 +23,11 @@ public class ReservationController {
     this.reservationService = reservationService;
   }
 
-  @PostMapping
-  public Reservation createReservation(){
-    return reservationService.createReservation(LocalDateTime.now());
+  @PostMapping(consumes= MediaType.APPLICATION_JSON_VALUE)
+  public Reservation createReservation( @RequestBody Reservation reservation){
+    System.out.println(reservation.getStatus());
+    return reservationService.createReservation(reservation);
   }
+
 
 }

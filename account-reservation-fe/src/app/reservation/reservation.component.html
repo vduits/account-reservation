@@ -5,7 +5,7 @@
         <label>
             Motivation:
         </label>
-        <input type="textarea" class="form-control" formControlName="motivatie">
+        <input type="textarea" class="form-control" formControlName="motivation">
     </div>
     <div class="form-group">
         <label>
@@ -31,5 +31,3 @@
 <div *ngIf="!this.authService.isLoggedIn()">
     <p>Please login to use this page</p>
 </div>
-
-<button (click)="reservationRequestNow()" mat-button>Reserve today</button>

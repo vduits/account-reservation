@@ -1,5 +1,4 @@
 export interface Reservation{
-    id: string;
     user_id: string;
     group_name: string;
     account_count: number;

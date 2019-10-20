@@ -53,6 +53,14 @@ export class AuthenticationService {
     return this.user.role;
   }
 
+  getUserId(): string{
+    return this.fbUser.uid;
+  }
+
+  getUser(): User{
+    return this.user;
+  }
+
   isLoggedIn(): boolean {
     return this.authState !== null;
   }

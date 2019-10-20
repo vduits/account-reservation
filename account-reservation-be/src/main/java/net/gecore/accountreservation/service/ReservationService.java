@@ -19,9 +19,7 @@ public class ReservationService {
     this.reservationRepository = reservationRepository;
   }
 
-  public Reservation createReservation(LocalDateTime dateTime){
-    var reservation = new Reservation();
-    reservation.setStart_date(dateTime);
+  public Reservation createReservation(Reservation reservation){
     return reservationRepository.save(reservation);
   }
 
