@@ -5,8 +5,8 @@ import { ReservationComponent } from './reservation/reservation.component';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'reservation', component: ReservationComponent }
+  { path: 'login', component: LoginComponent, data: {title: 'Login'}  },
+  { path: 'reservation', component: ReservationComponent, data: {title: 'Reservations'}  }
 ];
 
 @NgModule({
