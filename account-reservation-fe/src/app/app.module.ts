@@ -15,6 +15,7 @@ import { ReservationService } from './services/api/reservation/reservation.servi
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReservationComponent } from './reservation/reservation.component';
 import { MenuComponent } from './menu/menu/menu.component';
+import { AccountPermissionRequestComponent } from './account-permission-request/account-permission-request.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MenuComponent } from './menu/menu/menu.component';
     AppComponent,
     LoginComponent,
     ReservationComponent,
-    MenuComponent
+    MenuComponent,
+    AccountPermissionRequestComponent
   ],
   imports: [
     BrowserModule,
