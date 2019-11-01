@@ -8,20 +8,22 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'account-reservation';
+  title = 'Account Reservation';
   header_title: string;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    const pageTitle = this.header_title;
+    const pageTitle = this.title;
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(() => {
         const child = this.activatedRoute.firstChild;
-        if(child.snapshot.data['title']){
-          return child.snapshot.data['title'];
+        if(child != null){
+          if(child.snapshot.data['title']){
+            return child.snapshot.data['title'];
+          }
         }
         return pageTitle;
       })
