@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from '../models/User';
 import { Observable } from 'rxjs';
+import { Role } from '../models/Role';
+import {UserModificationService} from './firebase/user-modification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,8 @@ export class AuthenticationService {
 
   constructor(
     private firebaseAuth: AngularFireAuth,
-    private afStore: AngularFirestore
+    private afStore: AngularFirestore,
+    private userMod: UserModificationService
     ) {
     this.firebaseAuth.authState.subscribe(
       (auth) => {
@@ -26,28 +29,41 @@ export class AuthenticationService {
         if (auth == null) {
           this.loggedIn = false;
           this.displayName = 'Not logged in';
+          this.fbUser = null;
+          this.obUser = null;
         } else {
           this.loggedIn = true;
           this.displayName = auth.displayName;
           this.fbUser = auth;
-          this.checkPermissies(this.fbUser.uid);
+          this.checkPermissions(this.fbUser);
         }
       }
     );
   }
 
-  async checkPermissies(uid: string){
-    this.userDoc = this.afStore.doc<User>(`users/${uid}`);
+  async checkPermissions(fbUser: firebase.User){
+    this.userDoc = this.afStore.doc<User>(`users/${fbUser.uid}`);
     this.obUser = this.userDoc.valueChanges();
     this.obUser.subscribe(queriedUser =>{
       if(queriedUser == null){
-        console.log(' cannot find user, create one instead?');
+        if(this.isLoggedIn()){
+          this.createRegisteredUserIfNotExists(fbUser);
+        }
       }else{
         this.user = queriedUser;
-        console.log(queriedUser);
+        if(this.user.role === Role.Permitted || this.user.role === Role.Admin){
+          console.log('Neat');
+        }else if (this.user.role === Role.Registered){
+          console.log('not neat, but at least Registered.');
+        }
       }
     })
   }
+
+  createRegisteredUserIfNotExists(fbUser: firebase.User){
+    this.userMod.createRegisteredUser(fbUser);
+  }
+
 
   checkRole(): string{
     return this.user.role;
@@ -62,6 +78,6 @@ export class AuthenticationService {
   }
 
   isLoggedIn(): boolean {
-    return this.authState !== null;
+    return this.authState != null;
   }
 }

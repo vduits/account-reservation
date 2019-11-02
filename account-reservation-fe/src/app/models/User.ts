@@ -1,4 +1,6 @@
+import { Role } from './Role';
+
 export interface User{
     gmail: string;
-    role: string;
+    role: Role;
 }
