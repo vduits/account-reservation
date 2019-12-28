@@ -1,6 +1,5 @@
 package net.gecore.accountreservation.service;
 
-import java.time.LocalDateTime;
 import net.gecore.accountreservation.domain.Reservation;
 import net.gecore.accountreservation.repository.AccountRepository;
 import net.gecore.accountreservation.repository.ReservationRepository;

@@ -14,7 +14,7 @@ public class Reservation {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;
-  private String user_id;
+  private UUID user_id;
   private String group_name;
   private int account_count;
   private LocalDateTime start_date;
@@ -30,11 +30,11 @@ public class Reservation {
     this.id = id;
   }
 
-  public String getUser_id() {
+  public UUID getUser_id() {
     return user_id;
   }
 
-  public void setUser_id(String user_id) {
+  public void setUser_id(UUID user_id) {
     this.user_id = user_id;
   }
 
