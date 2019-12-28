@@ -4,13 +4,15 @@
             <label>
                 Gmail:
             </label>
-            <input type="text" class="form-control" readonly formControlName="gmail" value="{{this.authService.getUser()?.gmail}}">
+            <input type="text" class="form-control" readonly formControlName="gmail"
+                value="{{this.authService.getUser()?.gmail}}">
         </div>
         <div class="form-group">
             <label>
                 Discord:
             </label>
-            <input type="text" class="form-control" readonly formControlName="discord" />
+            <input type="text" class="form-control" readonly formControlName="discord"
+                value="{{this.discordService.buildAuthRequest()}}">
         </div>
         <div class="form-group">
             <label>
@@ -20,8 +22,7 @@
         </div>
         <button type="submit" [disabled]="!reservationForm.valid">Submit</button>
     </form>
-    </div>
-    <div *ngIf="!this.authService.isLoggedIn()">
-        <p>Please login to use this page</p>
-    </div>
-    
+</div>
+<div *ngIf="!this.authService.isLoggedIn()">
+    <p>Please login to use this page</p>
+</div>

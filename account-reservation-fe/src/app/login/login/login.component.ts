@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 import { AuthenticationService } from '../../services/authentication.service';
+import { GoogleService } from 'src/app/services/google/google.service';
 
 @Component({
   selector: 'app-login',
@@ -10,18 +9,19 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
+
   constructor(
-    private afAuth: AngularFireAuth,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private googleService: GoogleService
     ) {
   }
 
-  login() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+  loginToGoogle() {
+    this.googleService.signInWithGoogle();
   }
 
-  logout() {
-    this.afAuth.auth.signOut();
+  logoutFromGoogle() {
+    this.googleService.signOut();
   }
 
   isLoggedIn(): boolean {
@@ -29,6 +29,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+  }  
 
 }

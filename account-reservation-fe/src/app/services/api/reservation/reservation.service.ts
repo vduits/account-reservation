@@ -20,8 +20,8 @@ export class ReservationService {
       })
     };    
     console.log(reservation);
-    let stuff = `${environment.api}${this.reservationEndpoint}`;
-    this.http.post(stuff,reservation,httpOptions).subscribe(
+    let uri = `${environment.api}${this.reservationEndpoint}`;
+    this.http.post(uri,reservation,httpOptions).subscribe(
       data => {
         console.log(data);
       },
