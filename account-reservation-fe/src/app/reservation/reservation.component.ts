@@ -3,6 +3,7 @@ import { ReservationService } from '../services/api/reservation/reservation.serv
 import { AuthenticationService } from '../services/authentication.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Reservation } from '../models/Reservation';
+import { UserService } from '../services/api/user/user.service';
 
 @Component({
   selector: 'app-reservation',
@@ -21,7 +22,7 @@ export class ReservationComponent implements OnInit {
   
   constructor(
     private reservationService: ReservationService,
-    private authService: AuthenticationService
+    private userService: UserService
     ) { }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class ReservationComponent implements OnInit {
     let dateFrom = new Date(this.reservationForm.value.date +'T'+ this.reservationForm.value.starttime);
     let dateUntil = new Date(this.reservationForm.value.date +'T'+ this.reservationForm.value.endtime);
     let reservation: Reservation = {
-      user_id: this.authService.getUserId(),
+      user_id: this.userService.getUserId(),
       group_name: 'unsupported',
       account_count: 0,
       start_date: dateFrom,

@@ -1,0 +1,9 @@
+<div *ngIf="this.authService.isLoggedIn()">
+
+
+    <input type="text" class="form-control" readonly value="{{this.error}}">
+    <input type="text" class="form-control" readonly value="{{this.error_description}}">
+</div>
+<div *ngIf="!this.authService.isLoggedIn()">
+    <p>Please login to use this page</p>
+</div>

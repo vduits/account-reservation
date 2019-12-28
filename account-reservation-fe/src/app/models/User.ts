@@ -1,6 +1,8 @@
 import { Role } from './Role';
 
 export interface User{
-    gmail: string;
+    uuid?: string;
     role: Role;
+    gmail: string;
+    discordId?: string;
 }

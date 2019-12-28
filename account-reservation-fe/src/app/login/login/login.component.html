@@ -1,6 +1,8 @@
 <div *ngIf="!isLoggedIn()">
-    <button (click)="login()">Login with Google</button>
+    <button (click)="loginToGoogle()">Login with Google</button>
 </div>
 <div *ngIf="isLoggedIn()">
-    <button (click)="logout()">Logout</button>
+    <button (click)="logoutFromGoogle()">Logout</button>
+
 </div>
+

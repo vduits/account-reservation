@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
+import { DiscordService } from '../services/discord/discord.service';
 
 @Component({
   selector: 'app-account-permission-request',
@@ -14,7 +15,7 @@ export class AccountPermissionRequestComponent implements OnInit {
     discord: new FormControl('', Validators.required),
     picture: new FormControl('', Validators.required)
   });
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private discordService: DiscordService) { }
 
   ngOnInit() {
   }

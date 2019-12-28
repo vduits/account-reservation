@@ -5,18 +5,32 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HttpClientModule } from "@angular/common/http";
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from "angularx-social-login";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
 
-import { environment } from '../environments/firebase';
 import { ReservationService } from './services/api/reservation/reservation.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReservationComponent } from './reservation/reservation.component';
 import { MenuComponent } from './menu/menu/menu.component';
 import { AccountPermissionRequestComponent } from './account-permission-request/account-permission-request.component';
 
+import { google } from '../environments/google';
+import { AuthenticationComponent } from './authentication/authentication.component';
+
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider(google.client_id)
+  }
+]);
+
+export function provideGoogleConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -24,19 +38,19 @@ import { AccountPermissionRequestComponent } from './account-permission-request/
     LoginComponent,
     ReservationComponent,
     MenuComponent,
-    AccountPermissionRequestComponent
+    AccountPermissionRequestComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment),
-    AngularFireDatabaseModule,
-    AngularFirestoreModule,
-    AngularFireAuthModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [ 
+    {provide: AuthServiceConfig, useFactory: provideGoogleConfig}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
