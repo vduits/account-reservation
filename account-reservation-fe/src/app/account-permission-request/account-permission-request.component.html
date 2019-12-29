@@ -4,15 +4,21 @@
             <label>
                 Gmail:
             </label>
-            <input type="text" class="form-control" readonly formControlName="gmail"
-                value="{{this.authService.getUser()?.gmail}}">
+            <input type="text" class="form-control" readonly formControlName="gmail" />
         </div>
         <div class="form-group">
             <label>
-                Discord:
+                <div *ngIf="reservationForm.get('discord').valid">
+                    Discord Id:
+                </div>
+                <div *ngIf="!reservationForm.get('discord').valid">
+                    Sign into
+                    <a href="{{this.discordService.buildAuthRequest()}}" target="_blank">
+                        <img width="10%" height="10%" src="assets/discord/discord_logo_wordmark_color.png">
+                    </a>
+                </div>
             </label>
-            <input type="text" class="form-control" readonly formControlName="discord"
-                value="{{this.discordService.buildAuthRequest()}}">
+            <input type="text" class="form-control" readonly formControlName="discord" />
         </div>
         <div class="form-group">
             <label>
