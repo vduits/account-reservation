@@ -19,18 +19,19 @@ export class ReservationComponent implements OnInit {
     motivation: new FormControl('', Validators.required),
     date: new FormControl(Validators.required)
   });
-  
+
   constructor(
     private reservationService: ReservationService,
+    private authService: AuthenticationService,
     private userService: UserService
-    ) { }
+  ) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    let dateFrom = new Date(this.reservationForm.value.date +'T'+ this.reservationForm.value.starttime);
-    let dateUntil = new Date(this.reservationForm.value.date +'T'+ this.reservationForm.value.endtime);
+    let dateFrom = new Date(this.reservationForm.value.date + 'T' + this.reservationForm.value.starttime);
+    let dateUntil = new Date(this.reservationForm.value.date + 'T' + this.reservationForm.value.endtime);
     let reservation: Reservation = {
       user_id: this.userService.getUserId(),
       group_name: 'unsupported',

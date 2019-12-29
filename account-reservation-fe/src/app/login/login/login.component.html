@@ -1,7 +1,7 @@
-<div *ngIf="!isLoggedIn()">
-    <button (click)="loginToGoogle()">Login with Google</button>
+<div *ngIf="!this.authService.isLoggedIn()">
+   <img (click)="loginToGoogle()" src="assets/google/btn_google_signin_light_normal_web.png">
 </div>
-<div *ngIf="isLoggedIn()">
+<div *ngIf="this.authService.isLoggedIn()">
     <button (click)="logoutFromGoogle()">Logout</button>
 
 </div>

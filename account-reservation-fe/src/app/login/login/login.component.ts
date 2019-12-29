@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private authenticationService: AuthenticationService,
+    private authService: AuthenticationService,
     private googleService: GoogleService
     ) {
   }
@@ -23,11 +23,7 @@ export class LoginComponent implements OnInit {
   logoutFromGoogle() {
     this.googleService.signOut();
   }
-
-  isLoggedIn(): boolean {
-    return this.authenticationService.isLoggedIn();
-  }
-
+ 
   ngOnInit() {
   }  
 
