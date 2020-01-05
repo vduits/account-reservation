@@ -5,6 +5,8 @@ import { environment } from '../../../environments/environment';
 import { QueryParam } from './queryparam';
 import { ResponseType } from './responsetype';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserService } from '../api/user/user.service';
+import { User } from 'src/app/models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,8 @@ export class DiscordService {
   private query : string = '\?';
   private and : string = '&';
 
-  constructor() { }
+  constructor(private http: HttpClient,
+    private userService: UserService) { }
 
   buildAuthRequest(): string {
     let oauthRequest = `${this.discordApi}${this.oautherize}
@@ -29,28 +32,7 @@ export class DiscordService {
     return oauthRequest.replace(/ /g,'');
   }
 
-  sendCodeToBackEnd(code: string){
-    
-  }
 
-  // todo instead we want to push this towards as user request to enhance its profile with a discord one.
 
-  // createReservation(reservation: Reservation) {
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type':  'application/json'
-  //     })
-  //   };    
-  //   console.log(reservation);
-  //   let uri = `${environment.api}${this.reservationEndpoint}`;
-  //   this.http.post(uri,reservation,httpOptions).subscribe(
-  //     data => {
-  //       console.log(data);
-  //     },
-  //     error =>{
-  //       console.log(error);
-  //     }
-  //   );
-  // }
 
 }

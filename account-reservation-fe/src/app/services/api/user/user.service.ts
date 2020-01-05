@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/models/User';
@@ -11,7 +11,8 @@ import { finalize, takeWhile } from 'rxjs/operators';
 })
 export class UserService {
 
-  private userEndpoint: String = 'user';
+  private userEndpoint: string = 'user';
+  private tokenEndpoint: string = 'token';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -19,7 +20,7 @@ export class UserService {
   };
 
   private arcUser: User; 
-  private obsUser: EventEmitter<User> = new EventEmitter<User>(); 
+  @Output() private obsUser: EventEmitter<User> = new EventEmitter<User>(); 
   constructor(private http: HttpClient) { }
 
 
@@ -55,6 +56,23 @@ export class UserService {
       }
     );   
   }
+
+
+  sendCodeToBackEnd(code: string, user: User){
+    const body ={
+      'token': code.toString()
+    }
+    let uri = `${environment.api}${this.userEndpoint}/${user.uuid}/${this.tokenEndpoint}`;
+    this.http.post<User>(uri,body,this.httpOptions).subscribe(
+      user => {
+        this.arcUser = user;
+        this.obsUser.emit(this.arcUser);
+      },
+      error =>{
+        console.log(error);
+      }
+    );
+  } 
 
 
   retrieveOrCreateUser(gmail: string){

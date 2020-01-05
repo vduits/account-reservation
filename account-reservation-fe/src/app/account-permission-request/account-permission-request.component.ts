@@ -1,9 +1,10 @@
 import { Component, OnInit, AfterContentInit, AfterViewChecked } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
 import { DiscordService } from '../services/discord/discord.service';
 import { UserService } from '../services/api/user/user.service';
 import { User } from '../models/User';
+
 
 @Component({
   selector: 'app-account-permission-request',
@@ -31,13 +32,14 @@ export class AccountPermissionRequestComponent implements OnInit, AfterContentIn
       this.fillInFields(guser)
     }else{
       this.userService.getObsUser().subscribe(
-        user => {
+        (user: User) => {
           this.fillInFields(user);
         }
       )
     }
   }
-  
+
+
   fillInFields(user: User){
     let gval = this.reservationForm.get('gmail');
     let dval = this.reservationForm.get('discord');
