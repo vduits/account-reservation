@@ -1,8 +1,10 @@
 <div *ngIf="this.authService.isLoggedIn()">
 
+    <form class="form-group" [formGroup]="confirmationForm" (ngSubmit)="onSubmit()">
+        <input type="text" class="form-control" readonly value="{{this.error}}">
+        <input type="text" class="form-control" readonly value="{{this.error_description}}">
+    </form>
 
-    <input type="text" class="form-control" readonly value="{{this.error}}">
-    <input type="text" class="form-control" readonly value="{{this.error_description}}">
 </div>
 <div *ngIf="!this.authService.isLoggedIn()">
     <p>Please login to use this page</p>
