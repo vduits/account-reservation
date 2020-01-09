@@ -1,7 +1,11 @@
 package net.gecore.accountreservation.service;
 
 import java.util.Optional;
+import java.util.UUID;
+import net.gecore.accountreservation.domain.DiscordUser;
 import net.gecore.accountreservation.domain.User;
+import net.gecore.accountreservation.domain.discord.DiscordAuthResponse;
+import net.gecore.accountreservation.domain.discord.DiscordToken;
 import net.gecore.accountreservation.domain.component.Role;
 import net.gecore.accountreservation.repository.UserRepository;
 import net.gecore.accountreservation.service.util.EmailValidator;
@@ -11,18 +15,23 @@ import org.springframework.stereotype.Component;
 public class UserService {
 
   private UserRepository userRepository;
+  private DiscordService discordService;
 
-
-  public UserService(UserRepository userRepository){
+  public UserService(UserRepository userRepository, DiscordService discordService){
     this.userRepository = userRepository;
+    this.discordService = discordService;
   }
 
-  public Optional<User> retrieveUser(String gmail){
+  public Optional<User> retrieveUserByGmail(String gmail){
     if (EmailValidator.validateEmail(gmail)) {
       return userRepository.findByGmail(gmail);
     }else{
       return Optional.empty();
     }
+  }
+
+  public Optional<User> retrieveUserById(UUID id){
+    return userRepository.findById(id);
   }
 
   public Optional<User> createUser(User user){
@@ -40,6 +49,18 @@ public class UserService {
     }
   }
 
+
+  public Optional<User> updateUserWithDiscord(User user, DiscordToken token){
+   Optional<DiscordUser> response =  this.discordService.pushTokenToId(token, user);
+   if(response.isPresent()){
+     DiscordUser discordUser = response.get();
+
+     user.setDiscordId(discordUser.getUsername()+"#"+discordUser.getDiscriminator());
+     return Optional.of(userRepository.save(user));
+   }else{
+     return Optional.empty();
+   }
+  }
 
 
 }

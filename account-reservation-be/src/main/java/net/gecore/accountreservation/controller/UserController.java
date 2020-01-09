@@ -1,6 +1,9 @@
 package net.gecore.accountreservation.controller;
 
+import java.util.Optional;
+import java.util.UUID;
 import net.gecore.accountreservation.domain.User;
+import net.gecore.accountreservation.domain.discord.DiscordToken;
 import net.gecore.accountreservation.domain.component.Role;
 import net.gecore.accountreservation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +30,7 @@ public class UserController {
 
   @GetMapping(value = "{gmail}",produces = MediaType.APPLICATION_JSON_VALUE)
   public User checkUser(@PathVariable String gmail){
-    var result = this.userService.retrieveUser(gmail);
+    var result = this.userService.retrieveUserByGmail(gmail);
     return result.orElseGet(User::new);
   }
 
@@ -41,5 +44,14 @@ public class UserController {
     }
   }
 
-
+  @PostMapping(value = "{id}/token",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public User tradeDiscordToken(@PathVariable UUID id, @RequestBody DiscordToken token){
+    Optional<User> foundUser = this.userService.retrieveUserById(id);
+    if(foundUser.isPresent()){
+      this.userService.updateUserWithDiscord(foundUser.get(), token);
+      return foundUser.get();
+    }else{
+      return new User();
+    }
+  }
 }

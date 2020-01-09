@@ -1,1 +1,3 @@
 account-reservation-fe/src/environments/firebase.ts
+account-reservation-fe/src/environments/google.ts
+account-reservation-fe/src/environments/discord.ts
