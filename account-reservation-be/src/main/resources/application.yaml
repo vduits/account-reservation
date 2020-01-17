@@ -6,10 +6,15 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     show-sql: true
 server:
   port: 8048
 api:
   crossorigin: http://localhost:4200
   uri: /api/
+  discord:
+    api-endpoint: https://discordapp.com/api/v6
+    redirect-uri: http://localhost:4200/authentication
+    client-id: 
+    client-secret:
