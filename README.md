@@ -4,6 +4,17 @@ Further details about this repo will follow on first release.
 
 # Development notes
 
+For development Visual Studio Code has been used for the front end and IntelliJ Idea for the backend.
+
+First get PostgreSQL up and create the several configuration files from the integrations.
+
+After that you can use ``npm install`` in the main [front-end folder](https://github.com/vduits/account-reservation/tree/develop/account-reservation-fe). Details can be found in the same folder using [angular cli](https://cli.angular.io/).
+
+With angular cli you can run ``ng serve``, or you can use ``npm start`` which will do the same an d run the application at ``http://localhost:4200``. The java app will run by default at ``http://localhost:8048``.
+
+The front-end will require the java backend to be able to render most pages due to relying on its endpoints.
+
+
 ## PostgreSQL
 The backend requires a PostgreSQL instance to be active.
 A docker-compose.yaml has been provided to start one through docker.
